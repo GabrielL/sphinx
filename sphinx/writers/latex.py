@@ -38,14 +38,6 @@ if False:
 
 logger = logging.getLogger(__name__)
 
-BEGIN_DOC = r'''
-\begin{document}
-%(shorthandoff)s
-%(maketitle)s
-%(tableofcontents)s
-'''
-
-
 URI_SCHEMES = ('mailto:', 'http:', 'https:', 'ftp:')
 SECNUMDEPTH = 3
 
@@ -895,8 +887,6 @@ class LaTeXTranslator(nodes.NodeVisitor):
         self.footnotestack.append(self.collect_footnotes(node))
         self.curfilestack.append(node.get('docname', ''))
         if self.first_document == 1:
-            # the first document is all the regular content ...
-            self.body.append(BEGIN_DOC % self.elements)
             self.first_document = 0
         elif self.first_document == 0:
             # ... and all others are the appendices
